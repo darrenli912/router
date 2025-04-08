@@ -7,6 +7,7 @@ curl -s https://raw.githubusercontent.com/Hackl0us/GeoIP2-CN/release/CN-ip-cidr.
   ipset add cnlist $ip  
 done  
 
+
 添加特殊网络ip  
 ipset add cnlist 10.0.0.0/8  
 ipset add cnlist 100.64.0.0/10   
@@ -18,9 +19,15 @@ ipset add cnlist 224.0.0.0/4
 ipset add cnlist 240.0.0.0/4  
 ipset add cnlist 255.255.255.255/32  
 
+持久化ipset  
+sudo ipset save > /etc/ipset.conf  
+
+
 
 透明代理  
 命令加到rc.local  
+/sbin/ipset restore < /etc/ipset.conf  
+
 iptables -t nat -A OUTPUT -d {服务器ip} -j RETURN  
 iptables -t nat -A OUTPUT -p tcp -m set --match-set cnlist dst -j RETURN  
 iptables -t nat -A OUTPUT -p tcp -j REDIRECT --to-ports 1088  
