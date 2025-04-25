@@ -69,4 +69,5 @@ sudo iptables -t nat -D PREROUTING 2
 
 ## dnscrypt-proxy[下载linux_arm64,listen 0.0.0.0]， 按wiki进行安装。
 wget https://github.com/DNSCrypt/dnscrypt-proxy/releases/download/2.1.8/dnscrypt-proxy-linux_arm64-2.1.8.tar.gz  
-## 加systemctrl启动
+wiki  
+https://github.com/DNSCrypt/dnscrypt-proxy/wiki/Installation-linux  
