@@ -1,7 +1,31 @@
 # router
-## armbian + naiveproxy[下载linux_arm64，redir模式,listen 0.0.0.0] 
-分流  
+## armbian 
+sudo apt-get update 
 sudo apt install ipset  
+sudo apt install vim  
+## naiveproxy[下载linux_arm64，redir模式,listen 0.0.0.0]  
+vim /etc/systemd/system/naive.service  
+
+[Unit]   
+Description=NaiveProxy Server Service  
+After=network-online.target  
+
+[Service]   
+Type=simple  
+User=nobody  
+CapabilityBoundingSet=CAP_NET_BIND_SERVICE  
+ExecStart=/usr/local/bin/naive /usr/local/etc/naive/config.json  
+
+[Install]   
+WantedBy=multi-user.target  
+
+
+###启用服务  
+systemctl enable naive.service  
+systemctl start naive.service  
+systemctl status naive.service  
+
+分流  
 ipset create cnlist hash:net  
 curl -s https://raw.githubusercontent.com/Hackl0us/GeoIP2-CN/release/CN-ip-cidr.txt | while read ip; do  
   ipset add cnlist $ip  
@@ -44,4 +68,5 @@ sudo iptables -t nat -D OUTPUT 2
 sudo iptables -t nat -D PREROUTING 2  
 
 ## dnscrypt-proxy[下载linux_arm64,listen 0.0.0.0]， 按wiki进行安装。
+wget https://github.com/DNSCrypt/dnscrypt-proxy/releases/download/2.1.8/dnscrypt-proxy-linux_arm64-2.1.8.tar.gz  
 ## 加systemctrl启动
