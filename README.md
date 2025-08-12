@@ -1,6 +1,6 @@
 # router
 ## armbian 
-sudo apt-get update 
+sudo apt-get update  
 sudo apt install ipset  
 sudo apt install vim  
 ## naiveproxy[下载linux_arm64，redir模式,listen 0.0.0.0]  
@@ -27,7 +27,7 @@ systemctl status naive.service
 
 分流  
 ipset create cnlist hash:net  
-curl -s https://raw.githubusercontent.com/Hackl0us/GeoIP2-CN/release/CN-ip-cidr.txt | while read ip; do  
+curl -s https://raw.githubusercontent.com/mayaxcn/china-ip-list/master/chnroute.txt | while read ip; do  
   ipset add cnlist $ip  
 done  
 
